@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Técnicas de Pesca - Guía Local</title>
+    <title>Técnicas de Pesca - Viedma y Carmen de Patagones</title>
     <style>
         * {
             margin: 0;
@@ -35,6 +35,12 @@
             font-size: 3rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .location-subtitle {
+            font-size: 1.3rem;
+            color: #ecf0f1;
+            margin-bottom: 10px;
         }
 
         .back-btn {
@@ -159,6 +165,104 @@
             opacity: 0.1;
         }
 
+        .species-box {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid #2ecc71;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .species-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .species-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .species-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.02);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .fish-image {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .fish-info {
+            color: white;
+            line-height: 1.6;
+        }
+
+        .fish-info h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @keyframes slideInDown {
             from {
                 opacity: 0;
@@ -187,6 +291,10 @@
                 gap: 20px;
             }
             
+            .species-list {
+                grid-template-columns: 1fr;
+            }
+            
             h1 {
                 font-size: 2rem;
             }
@@ -202,9 +310,63 @@
 
     <div class="container">
         <header>
-            <h1>🎯 Técnicas de Pesca Local</h1>
-            <p>Métodos probados y trucos de la región</p>
+            <h1>🎯 Técnicas de Pesca</h1>
+            <p class="location-subtitle">Viedma y Carmen de Patagones</p>
+            <p>Río Negro - Información Verificada</p>
         </header>
+
+        <div class="technique-section">
+            <h2 class="technique-title">
+                <span class="technique-icon">🐟</span>
+                Especies Confirmadas del Río Negro
+            </h2>
+            
+            <div class="technique-content">
+                <div>
+                    <p class="technique-description">
+                        Especies oficialmente documentadas en el Río Negro a la altura de Viedma y Carmen de Patagones, según relevamientos ictícolas.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <strong>Nota Importante:</strong> El río tiene influencia de mareas en esta zona, lo que permite la presencia de especies marinas migratorias además de las dulceacuícolas.
+                    </div>
+                </div>
+                
+                <div class="species-box">
+                    <h4>🎣 Especies Disponibles</h4>
+                    <div class="species-list">
+                        <div class="species-item" onclick="showFishModal('pejerrey-patagonico')">
+                            <strong>Pejerrey Patagónico</strong>
+                            <br><small>Especie autóctona</small>
+                        </div>
+                        <div class="species-item" onclick="showFishModal('pejerrey-bonaerense')">
+                            <strong>Pejerrey Bonaerense</strong>
+                            <br><small>Especie introducida</small>
+                        </div>
+                        <div class="species-item" onclick="showFishModal('bagre-marino')">
+                            <strong>Bagre Marino</strong>
+                            <br><small>Migratorio</small>
+                        </div>
+                        <div class="species-item" onclick="showFishModal('bagre-torrente')">
+                            <strong>Bagre del Torrente</strong>
+                            <br><small>Autóctono</small>
+                        </div>
+                        <div class="species-item" onclick="showFishModal('lisa')">
+                            <strong>Lisa</strong>
+                            <br><small>Pez marino que ingresa al río</small>
+                        </div>
+                        <div class="species-item" onclick="showFishModal('carpa')">
+                            <strong>Carpa</strong>
+                            <br><small>Especie exótica</small>
+                        </div>
+                        <div class="species-item" onclick="showFishModal('mojarra')">
+                            <strong>Mojarra</strong>
+                            <br><small>Presente en la zona</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="technique-section">
             <h2 class="technique-title">
@@ -216,53 +378,22 @@
             <div class="technique-content">
                 <div>
                     <p class="technique-description">
-                        La técnica más versátil para nuestras aguas. Perfecta para beginners pero con potencial para pescadores avanzados. Esta técnica funciona excelentemente en ríos de corriente media y lagos.
+                        Técnica versátil efectiva para pejerreyes y otras especies del río. Funciona bien en aguas con corriente moderada como las del Río Negro.
                     </p>
                     
                     <div class="highlight-box">
-                        <strong>Consejo Local:</strong> En esta región, el spinning funciona mejor durante las primeras horas de la mañana, especialmente cerca de las zonas rocosas donde los peces buscan refugio.
+                        <strong>Para Pejerreyes:</strong> Esta especie responde bien a señuelos pequeños y movimientos constantes. Son más activos durante cambios de marea.
                     </div>
                 </div>
                 
                 <div class="tips-list">
-                    <h4>Tips Esenciales</h4>
+                    <h4>Técnica General</h4>
                     <ul>
-                        <li>Usa señuelos de 7-12g para aguas locales</li>
-                        <li>Varía la velocidad de recogida cada 10 segundos</li>
-                        <li>Los colores plateados funcionan mejor en días nublados</li>
-                        <li>Mantén la caña en ángulo de 45° durante la recogida</li>
-                        <li>Paciencia: espera al menos 15 minutos por spot</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="technique-section">
-            <h2 class="technique-title">
-                <span class="technique-icon">🪝</span>
-                Pesca con Mosca
-            </h2>
-            <span class="difficulty-badge hard">Avanzado</span>
-            
-            <div class="technique-content">
-                <div>
-                    <p class="technique-description">
-                        Técnica elegante y efectiva para truchas en nuestros ríos de montaña. Requiere práctica pero ofrece resultados excepcionales, especialmente durante la temporada de insectos (octubre-marzo).
-                    </p>
-                    
-                    <div class="highlight-box">
-                        <strong>Secreto Local:</strong> Las truchas en nuestros ríos responden mejor a moscas que imitan insectos nativos. Los patrones locales como "Patagonia Caddis" son imbatibles.
-                    </div>
-                </div>
-                
-                <div class="tips-list">
-                    <h4>Técnica de Lanzado</h4>
-                    <ul>
-                        <li>Practica el lanzado básico en tierra primero</li>
-                        <li>Usa líneas flotantes para principiantes</li>
-                        <li>El timing es clave: "10 y 2" en el reloj</li>
-                        <li>Estudia los insectos locales para elegir moscas</li>
-                        <li>Acércate siempre desde aguas abajo</li>
+                        <li>Señuelos de 5-10g para aguas del río</li>
+                        <li>Varía velocidad de recogida regularmente</li>
+                        <li>Colores plateados imitan peces pequeños</li>
+                        <li>Mantén ángulo de caña apropiado</li>
+                        <li>Considera influencia de mareas</li>
                     </ul>
                 </div>
             </div>
@@ -271,29 +402,29 @@
         <div class="technique-section">
             <h2 class="technique-title">
                 <span class="technique-icon">⚓</span>
-                Pesca de Fondo
+                Pesca de Fondo para Bagres
             </h2>
             <span class="difficulty-badge medium">Intermedio</span>
             
             <div class="technique-content">
                 <div>
                     <p class="technique-description">
-                        Ideal para especies de fondo en nuestros lagos más profundos. Esta técnica brilla especialmente durante el invierno cuando los peces están menos activos en superficie.
+                        Los bagres (tanto marinos como del torrente) son especies de fondo. Esta técnica aprovecha sus hábitos alimentarios nocturnos.
                     </p>
                     
                     <div class="highlight-box">
-                        <strong>Zona Productiva:</strong> Los fondos rocosos cerca de las desembocaduras de arroyos son puntos calientes. La profundidad ideal está entre 8-15 metros.
+                        <strong>Bagres Marinos:</strong> Son migratorios y pueden alcanzar mayor tamaño. Ingresan al río siguiendo las mareas.
                     </div>
                 </div>
                 
                 <div class="tips-list">
-                    <h4>Configuración Óptima</h4>
+                    <h4>Configuración Básica</h4>
                     <ul>
-                        <li>Plomada de 20-40g según corriente</li>
-                        <li>Anzuelos #2-#6 para especies locales</li>
-                        <li>Línea madre de 0.25-0.30mm</li>
-                        <li>Cebos naturales: lombriz, maíz, queso</li>
-                        <li>Paciencia: esta técnica requiere tiempo</li>
+                        <li>Plomada según corriente del momento</li>
+                        <li>Anzuelos apropiados para bagres</li>
+                        <li>Cebos naturales funcionan mejor</li>
+                        <li>Línea resistente para especies grandes</li>
+                        <li>Mejores resultados de noche</li>
                     </ul>
                 </div>
             </div>
@@ -302,33 +433,149 @@
         <div class="technique-section">
             <h2 class="technique-title">
                 <span class="technique-icon">🌊</span>
-                Pesca en Corriente
+                Consideraciones de Marea
             </h2>
             <span class="difficulty-badge medium">Intermedio</span>
             
             <div class="technique-content">
                 <div>
                     <p class="technique-description">
-                        Técnica especializada para ríos con corriente fuerte. Los peces locales están adaptados a estas condiciones y conocer cómo pescar en corriente marca la diferencia entre volver con las manos vacías o con una buena captura.
+                        Viedma tiene tablas de mareas específicas, confirmando la influencia mareal en esta zona del río. Esto afecta el comportamiento de los peces.
                     </p>
                     
                     <div class="highlight-box">
-                        <strong>Timing Perfecto:</strong> Después de lluvias moderadas, cuando la corriente aumenta pero el agua no está turbia. Los peces son más activos.
+                        <strong>Información Verificada:</strong> Existen tablas de mareas oficiales para Viedma, indicando que la marea llega efectivamente hasta esta zona del río.
                     </div>
                 </div>
                 
                 <div class="tips-list">
-                    <h4>Dominar la Corriente</h4>
+                    <h4>Aprovechando las Mareas</h4>
                     <ul>
-                        <li>Lanza aguas arriba, deja derivar naturalmente</li>
-                        <li>Usa plomos justos: que toquen fondo ocasionalmente</li>
-                        <li>Mantén contacto constante con el señuelo</li>
-                        <li>Busca remansos y contracorrientes</li>
-                        <li>Cambia de posición cada 20 minutos</li>
+                        <li>Consultar tabla de mareas local</li>
+                        <li>Especies marinas ingresan con marea</li>
+                        <li>Cambios de marea activan la alimentación</li>
+                        <li>Ajustar técnica según flujo del agua</li>
+                        <li>Planificar sesiones según horarios de marea</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-section">
+            <h2 class="technique-title">
+                <span class="technique-icon">📋</span>
+                Información Reglamentaria
+            </h2>
+            <span class="difficulty-badge easy">Importante</span>
+            
+            <div class="technique-content">
+                <div>
+                    <p class="technique-description">
+                        Existen áreas organizadas de pesca en la costanera de Carmen de Patagones, lo que indica regulación oficial de la actividad pesquera.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <strong>Recomendación:</strong> Consultar con autoridades locales sobre permisos de pesca y reglamentaciones específicas antes de pescar.
+                    </div>
+                </div>
+                
+                <div class="tips-list">
+                    <h4>Antes de Pescar</h4>
+                    <ul>
+                        <li>Verificar permisos de pesca necesarios</li>
+                        <li>Consultar vedas y tallas mínimas</li>
+                        <li>Respetar áreas organizadas de pesca</li>
+                        <li>Informarse sobre límites de captura</li>
+                        <li>Consultar con guardafaunas locales</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal para mostrar imágenes de peces -->
+    <div id="fishModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const fishData = {
+            'pejerrey-patagonico': {
+                name: 'Pejerrey Patagónico',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Odontesthes_hatcheri.jpg/400px-Odontesthes_hatcheri.jpg',
+                description: 'Especie autóctona de la Patagonia. Pez alargado y plateado, puede alcanzar los 40 cm. Se alimenta principalmente de zooplancton y pequeños crustáceos.',
+                habitat: 'Habita en lagos y ríos patagónicos. Prefiere aguas frías y bien oxigenadas.'
+            },
+            'pejerrey-bonaerense': {
+                name: 'Pejerrey Bonaerense',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Odontesthes_bonariensis.jpg/400px-Odontesthes_bonariensis.jpg',
+                description: 'Especie introducida desde la región pampeana. Similar al patagónico pero de mayor tamaño, puede superar los 50 cm.',
+                habitat: 'Se adapta bien a diversos ambientes acuáticos. Más tolerante a cambios de temperatura.'
+            },
+            'bagre-marino': {
+                name: 'Bagre Marino',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Genidens_barbus.jpg/400px-Genidens_barbus.jpg',
+                description: 'Pez migratorio que ingresa al río desde el mar. Puede alcanzar gran tamaño, hasta 60 cm. Importante especie comercial.',
+                habitat: 'Vive en estuarios y ríos costeros. Migra siguiendo las mareas y ciclos reproductivos.'
+            },
+            'bagre-torrente': {
+                name: 'Bagre del Torrente',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Hatcheria_macraei.jpg/400px-Hatcheria_macraei.jpg',
+                description: 'Bagre autóctono patagónico de menor tamaño. Adaptado a aguas frías y corrientes rápidas.',
+                habitat: 'Vive en ríos y arroyos de montaña. Prefiere fondos rocosos y aguas bien oxigenadas.'
+            },
+            'lisa': {
+                name: 'Lisa',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mugil_liza.jpg/400px-Mugil_liza.jpg',
+                description: 'Pez marino que ingresa a estuarios y ríos. Cuerpo fusiforme, puede alcanzar 50 cm. Se alimenta de algas y detritos.',
+                habitat: 'Habita aguas costeras, estuarios y desembocaduras de ríos. Tolera variaciones de salinidad.'
+            },
+            'carpa': {
+                name: 'Carpa',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Cyprinus_carpio_2008_G1.jpg/400px-Cyprinus_carpio_2008_G1.jpg',
+                description: 'Especie exótica introducida. Pez robusto que puede superar los 70 cm. Muy adaptable pero considerada invasora.',
+                habitat: 'Se adapta a diversos ambientes acuáticos. Prefiere aguas lentas con vegetación.'
+            },
+            'mojarra': {
+                name: 'Mojarra',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Astyanax_fasciatus.jpg/400px-Astyanax_fasciatus.jpg',
+                description: 'Pez pequeño de agua dulce, generalmente no supera los 15 cm. Importante como alimento de especies mayores.',
+                habitat: 'Vive en grupos en aguas lentas. Común en remansos y zonas con vegetación acuática.'
+            }
+        };
+
+        function showFishModal(fishId) {
+            const fish = fishData[fishId];
+            const modal = document.getElementById('fishModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <div class="fish-info">
+                    <h3>${fish.name}</h3>
+                    <img src="${fish.image}" alt="${fish.name}" class="fish-image" 
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMzQ5OGRiIiBvcGFjaXR5PSIwLjIiLz4KPHR5cGU+SW1hZ2VuIG5vIGRpc3BvbmlibGU8L3R5cGU+Cjx0ZXh0IHg9IjIwMCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiI+SW1hZ2VuIG5vIGRpc3BvbmlibGU8L3RleHQ+Cjwvc3ZnPg=='">
+                    <p><strong>Descripción:</strong> ${fish.description}</p>
+                    <p><strong>Hábitat:</strong> ${fish.habitat}</p>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        // Cerrar modal
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('fishModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('fishModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
