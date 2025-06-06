@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicas de Pesca - Guía Local</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .technique-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeInUp 1s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .technique-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .technique-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .technique-icon {
+            font-size: 2.5rem;
+        }
+
+        .technique-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .technique-description {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .tips-list {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .tips-list h4 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .tips-list li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        .tips-list li:before {
+            content: '→';
+            position: absolute;
+            left: -10px;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .easy { background: #27ae60; }
+        .medium { background: #f39c12; }
+        .hard { background: #e74c3c; }
+
+        .highlight-box {
+            background: linear-gradient(45deg, rgba(52,152,219,0.2), rgba(155,89,182,0.2));
+            border: 2px solid rgba(52,152,219,0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .technique-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .technique-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.history.back()">← Volver</button>
+
+    <div class="container">
+        <header>
+            <h1>🎯 Técnicas de Pesca Local</h1>
+            <p>Métodos probados y trucos de la región</p>
+        </header>
+
+        <div class="technique-section">
+            <h2 class="technique-title">
+                <span class="technique-icon">🎣</span>
+                Pesca con Spinning
+            </h2>
+            <span class="difficulty-badge easy">Principiante</span>
+            
+            <div class="technique-content">
+                <div>
+                    <p class="technique-description">
+                        La técnica más versátil para nuestras aguas. Perfecta para beginners pero con potencial para pescadores avanzados. Esta técnica funciona excelentemente en ríos de corriente media y lagos.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <strong>Consejo Local:</strong> En esta región, el spinning funciona mejor durante las primeras horas de la mañana, especialmente cerca de las zonas rocosas donde los peces buscan refugio.
+                    </div>
+                </div>
+                
+                <div class="tips-list">
+                    <h4>Tips Esenciales</h4>
+                    <ul>
+                        <li>Usa señuelos de 7-12g para aguas locales</li>
+                        <li>Varía la velocidad de recogida cada 10 segundos</li>
+                        <li>Los colores plateados funcionan mejor en días nublados</li>
+                        <li>Mantén la caña en ángulo de 45° durante la recogida</li>
+                        <li>Paciencia: espera al menos 15 minutos por spot</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-section">
+            <h2 class="technique-title">
+                <span class="technique-icon">🪝</span>
+                Pesca con Mosca
+            </h2>
+            <span class="difficulty-badge hard">Avanzado</span>
+            
+            <div class="technique-content">
+                <div>
+                    <p class="technique-description">
+                        Técnica elegante y efectiva para truchas en nuestros ríos de montaña. Requiere práctica pero ofrece resultados excepcionales, especialmente durante la temporada de insectos (octubre-marzo).
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <strong>Secreto Local:</strong> Las truchas en nuestros ríos responden mejor a moscas que imitan insectos nativos. Los patrones locales como "Patagonia Caddis" son imbatibles.
+                    </div>
+                </div>
+                
+                <div class="tips-list">
+                    <h4>Técnica de Lanzado</h4>
+                    <ul>
+                        <li>Practica el lanzado básico en tierra primero</li>
+                        <li>Usa líneas flotantes para principiantes</li>
+                        <li>El timing es clave: "10 y 2" en el reloj</li>
+                        <li>Estudia los insectos locales para elegir moscas</li>
+                        <li>Acércate siempre desde aguas abajo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-section">
+            <h2 class="technique-title">
+                <span class="technique-icon">⚓</span>
+                Pesca de Fondo
+            </h2>
+            <span class="difficulty-badge medium">Intermedio</span>
+            
+            <div class="technique-content">
+                <div>
+                    <p class="technique-description">
+                        Ideal para especies de fondo en nuestros lagos más profundos. Esta técnica brilla especialmente durante el invierno cuando los peces están menos activos en superficie.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <strong>Zona Productiva:</strong> Los fondos rocosos cerca de las desembocaduras de arroyos son puntos calientes. La profundidad ideal está entre 8-15 metros.
+                    </div>
+                </div>
+                
+                <div class="tips-list">
+                    <h4>Configuración Óptima</h4>
+                    <ul>
+                        <li>Plomada de 20-40g según corriente</li>
+                        <li>Anzuelos #2-#6 para especies locales</li>
+                        <li>Línea madre de 0.25-0.30mm</li>
+                        <li>Cebos naturales: lombriz, maíz, queso</li>
+                        <li>Paciencia: esta técnica requiere tiempo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-section">
+            <h2 class="technique-title">
+                <span class="technique-icon">🌊</span>
+                Pesca en Corriente
+            </h2>
+            <span class="difficulty-badge medium">Intermedio</span>
+            
+            <div class="technique-content">
+                <div>
+                    <p class="technique-description">
+                        Técnica especializada para ríos con corriente fuerte. Los peces locales están adaptados a estas condiciones y conocer cómo pescar en corriente marca la diferencia entre volver con las manos vacías o con una buena captura.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <strong>Timing Perfecto:</strong> Después de lluvias moderadas, cuando la corriente aumenta pero el agua no está turbia. Los peces son más activos.
+                    </div>
+                </div>
+                
+                <div class="tips-list">
+                    <h4>Dominar la Corriente</h4>
+                    <ul>
+                        <li>Lanza aguas arriba, deja derivar naturalmente</li>
+                        <li>Usa plomos justos: que toquen fondo ocasionalmente</li>
+                        <li>Mantén contacto constante con el señuelo</li>
+                        <li>Busca remansos y contracorrientes</li>
+                        <li>Cambia de posición cada 20 minutos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

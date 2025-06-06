@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipos de Pesca - Guía Local</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .equipment-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .equipment-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .equipment-icon {
+            font-size: 2.5rem;
+        }
+
+        .equipment-title {
+            font-size: 1.8rem;
+            color: #ecf0f1;
+        }
+
+        .price-range {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .equipment-description {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .specs-list {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .specs-list h4 {
+            color: #3498db;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .specs-list li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .specs-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .pro-tip {
+            background: linear-gradient(45deg, rgba(52,152,219,0.2), rgba(155,89,182,0.2));
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .maintenance-section {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .maintenance-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+        }
+
+        .maintenance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .maintenance-card {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .maintenance-card h4 {
+            color: #f39c12;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .equipment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .equipment-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">← Volver</button>
+
+    <div class="container">
+        <header>
+            <h1>🛠️ Equipos de Pesca</h1>
+            <p>Herramientas esenciales para pescar en la región</p>
+        </header>
+
+        <div class="equipment-grid">
+            <div class="equipment-card">
+                <div class="equipment-header">
+                    <span class="equipment-icon">🎣</span>
+                    <h3 class="equipment-title">Cañas de Pescar</h3>
+                </div>
+                <div class="price-range">$15,000 - $80,000</div>
+                
+                <p class="equipment-description">
+                    La caña es tu herramienta principal. Para nuestras aguas locales, una caña de acción media de 2.10-2.40m es versátil y efectiva.
+                </p>
+
+                <div class="specs-list">
+                    <h4>Especificaciones Recomendadas</h4>
+                    <ul>
+                        <li>Longitud: 2.10m - 2.40m</li>
+                        <li>Acción: Media a Media-Rápida</li>
+                        <li>Peso de lanzado: 10-30g</li>
+                        <li>Material: Carbono (mejor sensibilidad)</li>
+                        <li>Anillas: SiC para mayor durabilidad</li>
+                    </ul>
+                </div>
+
+                <div class="pro-tip">
+                    <strong>Consejo Pro:</strong> Para principiantes, una caña de fibra de vidrio es más resistente a golpes y cuesta menos. Para avanzados, el carbono ofrece mejor sensibilidad.
+                </div>
+            </div>
+
+            <div class="equipment-card">
+                <div class="equipment-header">
+                    <span class="equipment-icon">⚙️</span>
+                    <h3 class="equipment-title">Reels/Carretes</h3>
+                </div>
+                <div class="price-range">$8,000 - $50,000</div>
+                
+                <p class="equipment-description">
+                    Un buen reel marca la diferencia. Para spinning, tamaño 2500-3000 es ideal para nuestras especies locales.
+                </p>
+
+                <div class="specs-list">
+                    <h4>Características Clave</h4>
+                    <ul>
+                        <li>Tamaño: 2500-3000 para spinning</li>
+                        <li>Rodamientos: Mínimo 5+1</li>
+                        <li>Ratio: 5.2:1 a 6.2:1</li>
+                        <li>Freno: Delantero, suave y progresivo</li>
+                        <li>Material: Cuerpo de aluminio preferible</li>
+                    </ul>
+                </div>
+
+                <div class="pro-tip">
+                    <strong>Tip Local:</strong> Los reels con freno delantero funcionan mejor con las especies agresivas de nuestros ríos. Invierte en calidad aquí.
+                </div>
+            </div>
+
+            <div class="equipment-card">
+                <div class="equipment-header">
+                    <span class="equipment-icon">🧵</span>
+                    <h3 class="equipment-title">Líneas y Sedales</h3>
+                </div>
+                <div class="price-range">$2,000 - $8,000</div>
+                
+                <p class="equipment-description">
+                    La línea conecta todo tu equipo. Para aguas locales, monofilamento 0.25-0.30mm es versátil para la mayoría de situaciones.
+                </p>
+
+                <div class="specs-list">
+                    <h4>Tipos Recomendados</h4>
+                    <ul>
+                        <li>Monofilamento: 0.25-0.30mm para spinning</li>
+                        <li>Trenzado: Mayor sensibilidad, menos elástico</li>
+                        <li>Fluorocarbono: Invisible bajo agua, ideal para líderes</li>
+                        <li>Capacidad: 150-200m en el carrete</li>
+                        <li>Resistencia: 12-18 lb para especies locales</li>
+                    </ul>
+                </div>
+
+                <div class="pro-tip">
+                    <strong>Secreto Local:</strong> En aguas cristalinas usa fluorocarbono. En aguas turbias, el monofilamento común funciona igual de bien y es más económico.
+                </div>
+            </div>
+
+            <div class="equipment-card">
+                <div class="equipment-header">
+                    <span class="equipment-icon">🎯</span>
+                    <h3 class="equipment-title">Señuelos y Carnadas</h3>
+                </div>
+                <div class="price-range">$500 - $5,000</div>
+                
+                <p class="equipment-description">
+                    Los señuelos adecuados son clave para el éxito. Los peces locales responden bien a colores naturales y movimientos realistas.
+                </p>
+
+                <div class="specs-list">
+                    <h4>Esenciales para la Región</h4>
+                    <ul>
+                        <li>Cucharas giratorias: plateadas y doradas</li>
+                        <li>Spinners: #2-#4 con paleta francesa</li>
+                        <li>Rapalas: 7-11cm en colores naturales</li>
+                        <li>Jigs: 1/4 a 1/2 oz con trailers</li>
+                        <li>Carnadas vivas: lombriz, maíz, queso</li>
+                    </ul>
+                </div>
+
+                <div class="pro-tip">
+                    <strong>Colores Ganadores:</strong> Plateado para días soleados, dorado para días nublados, y colores oscuros para aguas turbias o atardeceres.
+                </div>
+            </div>
+        </div>
+
+        <div class="maintenance-section">
+            <h2 class="maintenance-title">🔧 Mantenimiento de Equipos</h2>
+            
+            <div class="maintenance-grid">
+                <div class="maintenance-card">
+                    <h4>Después de Cada Salida</h4>
+                    <ul>
+                        <li>Enjuagar con agua dulce todo el equipo</li>
+                        <li>Secar completamente antes de guardar</li>
+                        <li>Revisar línea por roces o cortes</li>
+                        <li>Limpiar anzuelos y señuelos</li>
+                    </ul>
+                </div>
+
+                <div class="maintenance-card">
+                    <h4>Mantenimiento Mensual</h4>
+                    <ul>
+                        <li>Engrasar rodamientos del reel</li>
+                        <li>Revisar anillas de la caña</li>
+                        <li>Cambiar línea si está desgastada</li>
+                        <li>Afilar anzuelos desafilados</li>
+                    </ul>
+                </div>
+
+                <div class="maintenance-card">
+                    <h4>Almacenamiento</h4>
+                    <ul>
+                        <li>Lugar seco y ventilado</li>
+                        <li>Cañas verticales o bien apoyadas</li>
+                        <li>Reels con freno suelto</li>
+                        <li>Señuelos organizados y secos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

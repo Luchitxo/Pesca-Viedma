@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lugares de Pesca - Spots Secretos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .location-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.8s;
+        }
+
+        .location-card:hover::before {
+            left: 100%;
+        }
+
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .location-icon {
+            font-size: 2.5rem;
+        }
+
+        .location-title {
+            font-size: 1.8rem;
+            color: #ecf0f1;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .easy { background: #27ae60; }
+        .medium { background: #f39c12; }
+        .hard { background: #e74c3c; }
+        .secret { background: linear-gradient(45deg, #9b59b6, #8e44ad); }
+
+        .location-description {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #3498db;
+        }
+
+        .info-box h4 {
+            color: #3498db;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .info-box p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .species-list {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .species-list h4 {
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        .species-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .species-tag {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        .secret-tip {
+            background: linear-gradient(45deg, rgba(155, 89, 182, 0.2), rgba(142, 68, 173, 0.2));
+            border: 2px solid rgba(155, 89, 182, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .secret-tip::before {
+            content: '🤫';
+            position: absolute;
+            top: -5px;
+            right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .secret-tip h4 {
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+
+        .weather-section {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .weather-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+        }
+
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .weather-card {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .weather-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .location-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">← Volver</button>
+
+    <div class="container">
+        <header>
+            <h1>📍 Lugares de Pesca</h1>
+            <p>Los mejores spots locales y secretos bien guardados</p>
+        </header>
+
+        <div class="locations-grid">
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-icon">🏞️</span>
+                    <h3 class="location-title">Río del Valle</h3>
+                </div>
+                <div class="difficulty-badge easy">Principiante</div>
+                
+                <p class="location-description">
+                    Un río tranquilo con corriente suave, perfecto para quienes se inician. Fácil acceso y múltiples spots a lo largo de 5km de costa pescable.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Mejor Horario</h4>
+                        <p>6:00-10:00 AM<br>17:00-20:00 PM</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Profundidad</h4>
+                        <p>1-4 metros<br>Fondo pedregoso</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Acceso</h4>
+                        <p>Auto hasta orilla<br>Camino asfaltado</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Servicios</h4>
+                        <p>Estacionamiento<br>Baños públicos</p>
+                    </div>
+                </div>
+
+                <div class="species-list">
+                    <h4>Especies Comunes</h4>
+                    <div class="species-tags">
+                        <span class="species-tag">Trucha arco iris</span>
+                        <span class="species-tag">Pejerrey</span>
+                        <span class="species-tag">Bagre</span>
+                        <span class="species-tag">Carpa</span>
+                    </div>
+                </div>
+
+                <div class="secret-tip">
+                    <h4>Tip Local</h4>
+                    <p>Los mejores spots están donde desemboca el arroyo pequeño, cerca del puente viejo. Usa señuelos pequeños y colores naturales.</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-icon">🏔️</span>
+                    <h3 class="location-title">Lago de Montaña</h3>
+                </div>
+                <div class="difficulty-badge medium">Intermedio</div>
+                
+                <p class="location-description">
+                    Lago glaciar de aguas cristalinas rodeado de montañas. Requiere caminata de 2 horas pero ofrece pesca excepcional y paisajes únicos.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Mejor Época</h4>
+                        <p>Nov-Abril<br>Aguas abiertas</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Profundidad</h4>
+                        <p>8-25 metros<br>Agua muy fría</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Acceso</h4>
+                        <p>Trekking 2h<br>Sendero marcado</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Dificultad</h4>
+                        <p>Media-Alta<br>Buen estado físico</p>
+                    </div>
+                </div>
+
+                <div class="species-list">
+                    <h4>Especies Comunes</h4>
+                    <div class="species-tags">
+                        <span class="species-tag">Trucha marrón</span>
+                        <span class="species-tag">Trucha de lago</span>
+                        <span class="species-tag">Salmón encerrado</span>
+                    </div>
+                </div>
+
+                <div class="secret-tip">
+                    <h4>Secreto de Montaña</h4>
+                    <p>Las truchas grandes están en la parte profunda cerca de la pared rocosa. Usa línea hundidora y señuelos que imiten peces pequeños.</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-icon">🌊</span>
+                    <h3 class="location-title">Desembocadura Sur</h3>
+                </div>
+                <div class="difficulty-badge hard">Avanzado</div>
+                
+                <p class="location-description">
+                    Zona donde el río se encuentra con el lago principal. Corrientes complejas pero muy productiva. Solo para pescadores experimentados.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Mejor Momento</h4>
+                        <p>Amanecer<br>Primera luz</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Corriente</h4>
+                        <p>Variable<br>Muy técnica</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Acceso</h4>
+                        <p>Bote recomendado<br>Kayak posible</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Riesgo</h4>
+                        <p>Alto<br>Corrientes fuertes</p>
+                    </div>
+                </div>
+
+                <div class="species-list">
+                    <h4>Especies Comunes</h4>
+                    <div class="species-tags">
+                        <span class="species-tag">Trucha grande</span>
+                        <span class="species-tag">Salmón</span>
+                        <span class="species-tag">Pejerrey real</span>
+                        <span class="species-tag">Perca</span>
+                    </div>
+                </div>
+
+                <div class="secret-tip">
+                    <h4>Solo Para Expertos</h4>
+                    <p>La clave está en leer las corrientes. Los peces grandes esperan en las contracorrientes donde se acumula la comida.</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-icon">🤫</span>
+                    <h3 class="location-title">El Spot Secreto</h3>
+                </div>
+                <div class="difficulty-badge secret">Secreto Local</div>
+                
+                <p class="location-description">
+                    Mi lugar personal favorito. Pocas personas lo conocen. Una pequeña laguna escondida entre juncos que se conecta con el río principal.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Acceso Especial</h4><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lugares de Pesca - Spots Secretos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .location-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.8s;
+        }
+
+        .location-card:hover::before {
+            left: 100%;
+        }
+
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .location-icon {
+            font-size: 2.5rem;
+        }
+
+        .location-title {
+            font-size: 1.8rem;
+            color: #ecf0f1;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .easy { background: #27ae60; }
+        .medium { background: #f39c12; }
+        .hard { background: #e74c3c; }
+        .secret { background: linear-gradient(45deg, #9b59b6, #8e44ad); }
+
+        .location-description {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #3498db;
+        }
+
+        .info-box h4 {
+            color: #3498db;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .info-box p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .species-list {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .species-list h4 {
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        .species-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .species-tag {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        .secret-tip {
+            background: linear-gradient(45deg, rgba(155, 89, 182, 0.2), rgba(142, 68, 173, 0.2));
+            border: 2px solid rgba(155, 89, 182, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .secret-tip::before {
+            content: '🤫';
+            position: absolute;
+            top: -5px;
+            right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .secret-tip h4 {
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+
+        .weather-section {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .weather-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+        }
+
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .weather-card {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .weather-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .tips-section {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .safety-warning {
+            background: linear-gradient(45deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2));
+            border: 2px solid rgba(231, 76, 60, 0.5);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .safety-warning h3 {
+            color: #e74c3c;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .location-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">← Volver</button>
+
+    <div class="container">
+        <header>
+            <h1>📍 Lugares de Pesca</h1>
+            <p>Los mejores spots locales y secretos bien guardados</p>
+        </header>
+
+        <div class="locations-grid">
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-icon">🏞️</span>
+                    <h3 class="location-title">Río del Valle</h3>
+                </div>
+                <div class="difficulty-badge easy">Principiante</div>
+                
+                <p class="location-description">
+                    Un río tranquilo con corriente suave, perfecto para quienes se inician. Fácil acceso y múltiples spots a lo largo de 5km de costa pescable.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Mejor Horario</h4>
+                        <p>6:00-10:00 AM<br>17:00-20:00 PM</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Profundidad</h4>
+                        <p>1-4 metros<br>Fondo pedregoso</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Acceso</h4>
+                        <p>Auto hasta orilla<br>Camino asfaltado</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Servicios</h4>
+                        <p>Estacionamiento<br>Baños públicos</p>
+                    </div>
+                </div>
+
+                <div class="species-list">
+                    <h4>Especies Comunes</h4>
+                    <div class="species-tags">
+                        <span class="species-tag">Trucha arco iris</span>
+                        <span class="species-tag">Pejerrey</span>
+                        <span class="species-tag">Bagre</span>
+                        <span class="species-tag">Carpa</span>
+                    </div>
+                </div>
+
+                <div class="secret-tip">
+                    <h4>Tip Local</h4>
+                    <p>Los mejores spots están donde desemboca el arroyo pequeño, cerca del puente viejo. Usa señuelos pequeños y colores naturales.</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-icon">🏔️</span>
+                    <h3 class="location-title">Lago de Montaña</h3>
+                </div>
+                <div class="difficulty-badge medium">Intermedio</div>
+                
+                <p class="location-description">
+                    Lago glaciar de aguas cristalinas rodeado de montañas. Requiere caminata de 2 horas pero ofrece pesca excepcional y paisajes únicos.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Mejor Época</h4>
+                        <p>Nov-Abril<br>Aguas abiertas</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Profundidad</h4>
+                        <p>8-25 metros<br>Agua muy fría</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Acceso</h4>
+                        <p>Trekking 2h<br>Sendero marcado</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Dificultad</h4>
+                        <p>Media-Alta<br>Buen estado físico</p>
+                    </div>
+                </div>
+
+                <div class="species-list">
+                    <h4>Especies Comunes</h4>
+                    <div class="species-tags">
+                        <span class="species-tag">Trucha marrón</span>
+                        <span class="species-tag">Trucha de lago</span>
+                        <span class="species-tag">Salmón encerrado</span>
+                    </div>
+                </div>
+
+                <div class="secret-tip">
+                    <h4>Secreto de Montaña</h4>
+                    <p>Las truchas grandes están en la parte profunda cerca de la pared rocosa. Usa línea hundidora y señuelos que imiten peces pequeños.</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-icon">🌊</span>
+                    <h3 class="location-title">Desembocadura Sur</h3>
+                </div>
+                <div class="difficulty-badge hard">Avanzado</div>
+                
+                <p class="location-description">
+                    Zona donde el río se encuentra con el lago principal. Corrientes complejas pero muy productiva. Solo para pescadores experimentados.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Mejor Momento</h4>
+                        <p>Amanecer<br>Primera luz</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Corriente</h4>
+                        <p>Variable<br>Muy técnica</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Acceso</h4>
+                        <p>Bote recomendado<br>Kayak posible</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Riesgo</h4>
+                        <p>Alto<br>Corrientes fuertes</p>
+                    </div>
+                </div>
+
+                <div class="species-list">
+                    <h4>Especies Comunes</h4>
+                    <div class="species-tags">
+                        <span class="species-tag">Trucha grande</span>
+                        <span class="species-tag">Salmón</span>
+                        <span class="species-tag">Pejerrey real</span>
+                        <span class="species-tag">Perca</span>
+                    </div>
+                </div>
+
+                <div class="secret-tip">
+                    <h4>Solo Para Expertos</h4>
+                    <p>La clave está en leer las corrientes. Los peces grandes esperan en las contracorrientes donde se acumula la comida.</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-icon">🤫</span>
+                    <h3 class="location-title">El Spot Secreto</h3>
+                </div>
+                <div class="difficulty-badge secret">Secreto Local</div>
+                
+                <p class="location-description">
+                    Mi lugar personal favorito. Pocas personas lo conocen. Una pequeña laguna escondida entre juncos que se conecta con el río principal.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Acceso Especial</h4>
+                        <p>Solo a pie<br>Sendero oculto</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Mejor Época</h4>
+                        <p>Otoño-Invierno<br>Menos visitantes</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Tamaño</h4>
+                        <p>Pequeña laguna<br>Muy productiva</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Privacidad</h4>
+                        <p>100% privado<br>Tu spot personal</p>
+                    </div>
+                </div>
+
+                <div class="species-list">
+                    <h4>Especies Especiales</h4>
+                    <div class="species-tags">
+                        <span class="species-tag">Trucha dorada</span>
+                        <span class="species-tag">Pejerrey gigante</span>
+                        <span class="species-tag">Perca trophy</span>
+                    </div>
+                </div>
+
+                <div class="secret-tip">
+                    <h4>El Gran Secreto</h4>
+                    <p>Este lugar solo se comparte con pescadores respetables. Las coordenadas exactas las revelaré solo a quienes demuestren verdadero respeto por la pesca.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="weather-section">
+            <h2 class="weather-title">⛅ Condiciones Ideales de Pesca</h2>
+            <div class="weather-grid">
+                <div class="weather-card">
+                    <span class="weather-icon">🌤️</span>
+                    <h3>Día Perfecto</h3>
+                    <p>Cielo parcialmente nublado, viento suave del sur, presión atmosférica estable. Los peces están más activos.</p>
+                </div>
+                <div class="weather-card">
+                    <span class="weather-icon">🌧️</span>
+                    <h3>Antes de la Lluvia</h3>
+                    <p>Las horas previas a una tormenta son excepcionales. La presión baja hace que los peces se alimenten intensamente.</p>
+                </div>
+                <div class="weather-card">
+                    <span class="weather-icon">🌅</span>
+                    <h3>Amanecer</h3>
+                    <p>Los primeros rayos de sol activan la cadena alimentaria. Este es el momento dorado para la pesca deportiva.</p>
+                </div>
+                <div class="weather-card">
+                    <span class="weather-icon">🌊</span>
+                    <h3>Agua en Movimiento</h3>
+                    <p>Un poco de oleaje o corriente oxigena el agua y mantiene a los peces cazando activamente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2 class="weather-title">🎣 Tips de los Locales</h2>
+            <div class="weather-grid">
+                <div class="weather-card">
+                    <span class="weather-icon">🐟</span>
+                    <h3>Señuelos Locales</h3>
+                    <p>Los colores que mejor funcionan aquí son verde oliva, marrón y dorado. Imitan los insectos y peces locales.</p>
+                </div>
+                <div class="weather-card">
+                    <span class="weather-icon">⏰</span>
+                    <h3>Timing Perfecto</h3>
+                    <p>La "hora mágica" aquí es entre 6:30-8:00 AM y 18:00-19:30 PM. Los peces tienen horarios muy marcados.</p>
+                </div>
+                <div class="weather-card">
+                    <span class="weather-icon">🎯</span>
+                    <h3>Técnica Local</h3>
+                    <p>En estos ríos funciona mejor la pesca lenta y paciente. Deja que el señuelo trabaje solo con la corriente.</p>
+                </div>
+                <div class="weather-card">
+                    <span class="weather-icon">📱</span>
+                    <h3>App Recomendada</h3>
+                    <p>Usa "FishBrain" para registrar tus capturas y ver qué están usando otros pescadores de la zona.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="safety-warning">
+            <h3>⚠️ Importante: Pesca Responsable</h3>
+            <p>Respeta los tamaños mínimos, las vedas de reproducción y practica catch & release cuando sea posible. Estos lugares se mantienen productivos gracias al cuidado de todos los pescadores.</p>
+            <p style="margin-top: 15px;"><strong>Lleva siempre:</strong> Chaleco salvavidas, botiquín básico, comunicación (celular/radio) y avisa a alguien sobre tu ubicación.</p>
+        </div>
+    </div>
+
+    <script>
+        // Animación suave al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.location-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+
+        // Efecto parallax suave en scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('body');
+            const speed = scrolled * 0.5;
+            parallax.style.backgroundPosition = `center ${speed}px`;
+        });
+    </script>
+</body>
+</html>
