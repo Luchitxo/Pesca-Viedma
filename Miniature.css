@@ -7,8 +7,14 @@
     display: block;
     margin-bottom: 8px;
     transition: transform 0.3s ease;
+    /* Opcional: añadir un borde sutil */
+    border: 1px solid rgba(255,255,255,0.2);
+    /* Opcional: sombra suave */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .species-item:hover .species-thumb {
     transform: scale(1.05);
+    /* Opcional: sombra más pronunciada en hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
