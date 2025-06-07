@@ -238,6 +238,40 @@
         </div>
 
         <div class="topics-grid">
+            <section id="comunidad" class="community-section">
+    <h2 style="margin-bottom: 20px; font-size: 2rem; text-align: center;">Únete a Nuestra Comunidad de Pescadores</h2>
+    <p style="font-size: 1.1rem; line-height: 1.8; text-align: center;">
+        La pesca es una pasión que se comparte. Conéctate con otros entusiastas, comparte tus experiencias, consejos y las capturas más emocionantes del Río Negro. ¡Juntos haremos crecer este amor por la pesca!
+    </p>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="https://www.facebook.com/groups/tu_grupo_de_pesca_viedma" target="_blank" class="btn facebook" style="margin-right: 15px;">
+            <span style="margin-right: 5px;">👥</span> Grupo de Facebook
+        </a>
+        <a href="mailto:tucorreo@example.com" class="btn email">
+            <span style="margin-right: 5px;">✉️</span> Contáctanos
+        </a>
+    </div>
+</section>
+
+<script>
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('open');
+        mobileMenuToggle.classList.toggle('open');
+    });
+
+    // Cierra el menú si se hace clic en un enlace (solo para móvil)
+    mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (mainNav.classList.contains('open')) {
+                mainNav.classList.remove('open');
+                mobileMenuToggle.classList.remove('open');
+            }
+        });
+    });
+</script>
     <a href="tecnicas-pesca.html" class="topic-card">
         <span class="topic-icon">🎯</span>
         <h3 class="topic-title">Técnicas de Pesca</h3>
