@@ -3,359 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Mundo de la Pesca</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: white;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-
-        .intro-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 50px;
-            border: 1px solid rgba(255,255,255,0.2);
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .topic-card {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(15px);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .topic-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            background: rgba(255,255,255,0.2);
-        }
-
-        .topic-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .topic-card:hover::before {
-            left: 100%;
-        }
-
-        .topic-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .topic-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .topic-description {
-            font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
-        }
-
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .popup-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: white;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .close:hover {
-            opacity: 1;
-        }
-
-        .popup h3 {
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-
-        .popup p {
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .intro-section {
-                padding: 25px;
-            }
-            
-            .topic-card {
-                padding: 20px;
-            }
-        }
-    </style>
+    <title>Mi Mundo de la Pesca - Guía Definitiva de Pesca en Viedma y Río Negro</title>
+    <link rel="stylesheet" href="Miniature.css">
+    <meta name="description" content="Descubre los mejores spots, técnicas y equipos para pescar en Viedma y el Río Negro. Guía completa para turistas y pescadores locales.">
+    <meta name="keywords" content="pesca Viedma, pesca Río Negro, dónde pescar Viedma, técnicas de pesca, equipos de pesca, pejerrey Viedma, salmón Río Negro, pesca Patagonia, guía de pesca Viedma">
+    <meta name="author" content="[Tu Nombre o el de tu Organización]">
+    <meta property="og:title" content="Mi Mundo de la Pesca - Guía Definitiva de Pesca en Viedma y Río Negro">
+    <meta property="og:description" content="Descubre los mejores spots, técnicas y equipos para pescar en Viedma y el Río Negro. Guía completa para turistas y pescadores locales.">
+    <meta property="og:image" content="https://es.pinterest.com/gelatynna/silueta-hombre-pescando/">
+    <meta property="og:url" content="https://donweb.com/es-int/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mi Mundo de la Pesca - Guía Definitiva de Pesca en Viedma y Río Negro">
+    <meta name="twitter:description" content="Descubre los mejores spots, técnicas y equipos para pescar en Viedma y el Río Negro. Guía completa para turistas y pescadores locales.">
+    <meta name="twitter:image" content="https://brainly.lat/tarea/14968894">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🎣 Mi Mundo de la Pesca</h1>
-            <p class="subtitle">Descubre los secretos de la pesca en mi región</p>
-        </header>
+    <header class="main-header">
+        <a href="index.html" class="header-logo">
+            🎣 Mi Mundo de la Pesca
+        </a>
+        <nav class="header-nav" id="mainNav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="tecnicas-pesca.html">Técnicas</a></li>
+                <li><a href="equipos-pesca.html">Equipos</a></li>
+                <li><a href="lugares-pesca.html">Lugares</a></li>
+                <li><a href="#contacto">Contacto</a></li> <li><a href="#comunidad">Comunidad</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
 
+    <div class="container">
         <div class="intro-section">
-            <h2 style="margin-bottom: 20px; font-size: 2rem;">¡Bienvenido Pescador!</h2>
+            <h2 style="margin-bottom: 20px; font-size: 2rem;">¡Bienvenido Pescador a Viedma y el Río Negro!</h2>
             <p style="font-size: 1.1rem; line-height: 1.8;">
-                La pesca es más que un pasatiempo, es una conexión profunda con la naturaleza y una tradición que se transmite de generación en generación. En esta región, tenemos la fortuna de contar con aguas ricas y diversas que ofrecen experiencias únicas para pescadores de todos los niveles.
+                La pesca en Viedma y Carmen de Patagones, a orillas del majestuoso Río Negro, es más que un pasatiempo; es una experiencia inmersiva que conecta profundamente con la naturaleza y las ricas tradiciones patagónicas. Aquí, donde el río se encuentra con el mar, te esperan aguas diversas y abundantes, ofreciendo desafíos y recompensas para pescadores de todos los niveles.
             </p>
             <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 15px;">
-                Aquí compartirás conmigo todo lo que he aprendido a lo largo de los años: desde las mejores técnicas y equipos hasta los spots secretos que solo los locales conocemos.
+                En "Mi Mundo de la Pesca", compartirás conmigo los secretos mejor guardados de la región: desde las **técnicas más efectivas** y el **equipo esencial** para nuestras aguas, hasta los **spots de pesca más productivos** que solo los locales conocemos. ¡Prepárate para vivir una aventura de pesca inolvidable en el corazón de la Patagonia!
             </p>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="lugares-pesca.html" class="btn" style="background: linear-gradient(45deg, #2ecc71, #27ae60);">¡Planifica tu Viaje de Pesca!</a>
+            </div>
         </div>
 
         <div class="topics-grid">
-            <section id="comunidad" class="community-section">
-    <h2 style="margin-bottom: 20px; font-size: 2rem; text-align: center;">Únete a Nuestra Comunidad de Pescadores</h2>
-    <p style="font-size: 1.1rem; line-height: 1.8; text-align: center;">
-        La pesca es una pasión que se comparte. Conéctate con otros entusiastas, comparte tus experiencias, consejos y las capturas más emocionantes del Río Negro. ¡Juntos haremos crecer este amor por la pesca!
-    </p>
-    <div style="text-align: center; margin-top: 30px;">
-        <a href="https://www.facebook.com/groups/tu_grupo_de_pesca_viedma" target="_blank" class="btn facebook" style="margin-right: 15px;">
-            <span style="margin-right: 5px;">👥</span> Grupo de Facebook
-        </a>
-        <a href="mailto:tucorreo@example.com" class="btn email">
-            <span style="margin-right: 5px;">✉️</span> Contáctanos
-        </a>
-    </div>
-</section>
+            <a href="tecnicas-pesca.html" class="topic-card">
+                <span class="topic-icon">🎯</span>
+                <h3 class="topic-title">Técnicas de Pesca</h3>
+                <p class="topic-description">
+                    Aprende las mejores técnicas adaptadas a nuestras aguas locales. Desde pesca con mosca hasta spinning avanzado.
+                </p>
+                <button class="btn">Explorar Técnicas</button>
+            </a>
 
-<script>
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mainNav = document.getElementById('mainNav');
+            <a href="equipos-pesca.html" class="topic-card">
+                <span class="topic-icon">🛠️</span>
+                <h3 class="topic-title">Equipos y Herramientas</h3>
+                <p class="topic-description">
+                    Descubre qué equipos funcionan mejor en nuestra región y cómo mantenerlos en perfectas condiciones.
+                </p>
+                <button class="btn">Ver Equipos</button>
+            </a>
 
-    mobileMenuToggle.addEventListener('click', () => {
-        mainNav.classList.toggle('open');
-        mobileMenuToggle.classList.toggle('open');
-    });
-
-    // Cierra el menú si se hace clic en un enlace (solo para móvil)
-    mainNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (mainNav.classList.contains('open')) {
-                mainNav.classList.remove('open');
-                mobileMenuToggle.classList.remove('open');
-            }
-        });
-    });
-</script>
-    <a href="tecnicas-pesca.html" class="topic-card">
-        <span class="topic-icon">🎯</span>
-        <h3 class="topic-title">Técnicas de Pesca</h3>
-        <p class="topic-description">
-            Aprende las mejores técnicas adaptadas a nuestras aguas locales. Desde pesca con mosca hasta spinning avanzado.
-        </p>
-        <button class="btn">Explorar Técnicas</button>
-    </a>
-
-    <a href="equipos-pesca.html" class="topic-card">
-        <span class="topic-icon">🛠️</span>
-        <h3 class="topic-title">Equipos y Herramientas</h3>
-        <p class="topic-description">
-            Descubre qué equipos funcionan mejor en nuestra región y cómo mantenerlos en perfectas condiciones.
-        </p>
-        <button class="btn">Ver Equipos</button>
-    </a>
-
-    <a href="lugares-pesca.html" class="topic-card">
-        <span class="topic-icon">📍</span>
-        <h3 class="topic-title">Lugares de Pesca</h3>
-        <p class="topic-description">
-            Los mejores spots locales, horarios ideales y secretos que solo los pescadores experimentados conocen.
-        </p>
-        <button class="btn">Descubrir Lugares</button>
-    </a>
-</div>
-
-    <!-- Popups -->
-    <div id="popup1" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup('popup1')">&times;</span>
-            <h3>🎯 Técnicas de Pesca</h3>
-            <p>¿Listo para perfeccionar tu técnica? Te llevaré a través de métodos probados y trucos locales que marcan la diferencia.</p>
-            <a href="tecnicas-pesca.html" class="btn">Ir a Técnicas</a>
+            <a href="lugares-pesca.html" class="topic-card">
+                <span class="topic-icon">📍</span>
+                <h3 class="topic-title">Lugares de Pesca</h3>
+                <p class="topic-description">
+                    Los mejores spots locales, horarios ideales y secretos que solo los pescadores experimentados conocen.
+                </p>
+                <button class="btn">Descubrir Lugares</button>
+            </a>
         </div>
-    </div>
 
-    <div id="popup2" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup('popup2')">&times;</span>
-            <h3>🛠️ Equipos y Herramientas</h3>
-            <p>El equipo correcto puede transformar tu experiencia de pesca. Descubre qué usar y cuándo usarlo.</p>
-            <a href="equipos-pesca.html" class="btn">Ver Equipos</a>
-        </div>
-    </div>
+        <section id="comunidad" class="community-section">
+            <h2 style="margin-bottom: 20px; font-size: 2rem; text-align: center;">Únete a Nuestra Comunidad de Pescadores</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; text-align: center;">
+                La pesca es una pasión que se comparte. Conéctate con otros entusiastas, comparte tus experiencias, consejos y las capturas más emocionantes del Río Negro. ¡Juntos haremos crecer este amor por la pesca!
+            </p>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://www.facebook.com/groups/tu_grupo_de_pesca_viedma" target="_blank" class="btn facebook" style="margin-right: 15px;">
+                    <span style="margin-right: 5px;">👥</span> Grupo de Facebook
+                </a>
+                <a href="mailto:tucorreo@example.com" class="btn email">
+                    <span style="margin-right: 5px;">✉️</span> Contáctanos
+                </a>
+            </div>
+        </section>
 
-    <div id="popup3" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup('popup3')">&times;</span>
-            <h3>📍 Lugares de Pesca</h3>
-            <p>Los spots secretos y lugares probados donde la pesca es siempre productiva. Conoce los secretos locales.</p>
-            <a href="lugares-pesca.html" class="btn">Explorar Lugares</a>
-        </div>
     </div>
 
     <script>
-        function openPopup(popupId) {
-            document.getElementById(popupId).style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
 
-        function closePopup(popupId) {
-            document.getElementById(popupId).style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+        mobileMenuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('open');
+            mobileMenuToggle.classList.toggle('open');
+        });
 
-        // Cerrar popup al hacer clic fuera del contenido
-        window.onclick = function(event) {
-            if (event.target.classList.contains('popup')) {
-                event.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // Cerrar popup con ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const popups = document.querySelectorAll('.popup');
-                popups.forEach(popup => {
-                    popup.style.display = 'none';
-                });
-                document.body.style.overflow = 'auto';
-            }
+        // Cierra el menú si se hace clic en un enlace (solo para móvil)
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav.classList.contains('open')) {
+                    mainNav.classList.remove('open');
+                    mobileMenuToggle.classList.remove('open');
+                }
+            });
         });
     </script>
 </body>
