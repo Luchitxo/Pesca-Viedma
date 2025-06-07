@@ -4,228 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipos de Pesca - Guía Local</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-            min-height: 100vh;
-            color: white;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: slideInDown 1s ease-out;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 100;
-        }
-
-        .back-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
-
-        .equipment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .equipment-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .equipment-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .equipment-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .equipment-icon {
-            font-size: 2.5rem;
-        }
-
-        .equipment-title {
-            font-size: 1.8rem;
-            color: #ecf0f1;
-        }
-
-        .price-range {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .equipment-description {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .specs-list {
-            background: rgba(255,255,255,0.05);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .specs-list h4 {
-            color: #3498db;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .specs-list li {
-            margin-bottom: 8px;
-            padding-left: 15px;
-            position: relative;
-        }
-
-        .specs-list li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-        }
-
-        .pro-tip {
-            background: linear-gradient(45deg, rgba(52,152,219,0.2), rgba(155,89,182,0.2));
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            font-style: italic;
-        }
-
-        .maintenance-section {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 40px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .maintenance-title {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 30px;
-            color: #ecf0f1;
-        }
-
-        .maintenance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .maintenance-card {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .maintenance-card h4 {
-            color: #f39c12;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .equipment-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .equipment-card {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="Miniature.css">
+    <meta name="description" content="Guía completa de equipos de pesca para Viedma y el Río Negro. Recomendaciones de cañas, reels, líneas, señuelos y carnadas para principiantes y expertos.">
+    <meta name="keywords" content="equipos de pesca Viedma, cañas de pesca, reels de pesca, carnadas Viedma, señuelos Viedma, kit de pesca principiante, equipo de pesca avanzado, mantenimiento de equipo">
+    <meta name="author" content="[Tu Nombre o el de tu Organización]">
 </head>
 <body>
-    <button class="back-btn" onclick="window.location.href='index.html'">← Volver</button>
+    <header class="main-header">
+        <a href="index.html" class="header-logo">
+            🎣 Mi Mundo de la Pesca
+        </a>
+        <nav class="header-nav" id="mainNav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="tecnicas-pesca.html">Técnicas</a></li>
+                <li><a href="equipos-pesca.html">Equipos</a></li>
+                <li><a href="lugares-pesca.html">Lugares</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#comunidad">Comunidad</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
 
     <div class="container">
-        <header>
+        <header style="text-align: center; margin-bottom: 50px;">
             <h1>🛠️ Equipos de Pesca</h1>
             <p>Herramientas esenciales para pescar en la región</p>
         </header>
@@ -340,6 +147,85 @@
             </div>
         </div>
 
+        <div class="maintenance-section" style="margin-top: 50px;">
+            <h2 class="maintenance-title">🎣 Tu Primer Equipo: Kit para Principiantes</h2>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">
+                Si estás dando tus primeros pasos en el mundo de la pesca, aquí te recomendamos un kit básico y económico para empezar con éxito en el Río Negro. Este equipo es versátil y fácil de manejar.
+            </p>
+            <div class="equipment-grid">
+                <div class="equipment-kit-card"> <div class="equipment-header">
+                        <span class="equipment-icon">🆕</span>
+                        <h3 class="equipment-title">Kit Básico Iniciación</h3>
+                    </div>
+                    <div class="price-range">$25,000 - $60,000 (Total estimado)</div>
+                    <p class="equipment-description">
+                        Este kit es ideal para aprender los fundamentos y disfrutar de las especies más comunes de la zona.
+                    </p>
+                    <div class="specs-list">
+                        <h4>Componentes Recomendados</h4>
+                        <ul>
+                            <li>Caña de fibra de vidrio 2.10m (acción media)</li>
+                            <li>Reel frontal tamaño 2000-2500 (3-4 rulemanes)</li>
+                            <li>Línea monofilamento 0.25mm (12 lb)</li>
+                            <li>Kit de anzuelos surtidos (#8 a #12)</li>
+                            <li>Plomos de 20-40g</li>
+                            <li>Algunas cucharas giratorias y spinners básicos</li>
+                        </ul>
+                    </div>
+                    <div class="pro-tip">
+                        <strong>Consejo de Inicio:</strong> No necesitas el equipo más caro para disfrutar. Este kit te dará confianza y experiencia.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="maintenance-section" style="margin-top: 50px;">
+            <h2 class="maintenance-title">🚀 Equipos para Pescadores Avanzados</h2>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">
+                Para aquellos que buscan maximizar el rendimiento, explorar técnicas específicas o ir tras especies de mayor tamaño y desafío.
+            </p>
+            <div class="equipment-grid">
+                <div class="equipment-kit-card"> <div class="equipment-header">
+                        <span class="equipment-icon">🎣</span>
+                        <h3 class="equipment-title">Caña para Lanzamiento Pesado</h3>
+                    </div>
+                    <div class="price-range">$50,000 - $150,000</div>
+                    <p class="equipment-description">
+                        Ideal para lances largos con cebos pesados o para luchar con salmones y lisas grandes en corrientes fuertes.
+                    </p>
+                    <div class="specs-list">
+                        <h4>Características Clave</h4>
+                        <ul>
+                            <li>Longitud: 2.70m - 3.30m (9-11 pies)</li>
+                            <li>Acción: Rápida a Extra-Rápida</li>
+                            <li>Peso de lanzado: 30-80g o más</li>
+                            <li>Material: Carbono de alto módulo (para sensibilidad y potencia)</li>
+                            <li>Anillas: Reforzadas SiC o Alconite</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="equipment-kit-card"> <div class="equipment-header">
+                        <span class="equipment-icon">⚙️</span>
+                        <h3 class="equipment-title">Reel de Alta Capacidad</h3>
+                    </div>
+                    <div class="price-range">$40,000 - $120,000</div>
+                    <p class="equipment-description">
+                        Necesario para líneas gruesas y combates prolongados con peces potentes.
+                    </p>
+                    <div class="specs-list">
+                        <h4>Características Clave</h4>
+                        <ul>
+                            <li>Tamaño: 4000-5000 (para spinning/baitcasting pesado)</li>
+                            <li>Rodamientos: 7+1 o más (suavidad y durabilidad)</li>
+                            <li>Freno: Multi-disco, potente y sellado (resistencia a la corrosión)</li>
+                            <li>Capacidad de Línea: 200m de 0.35mm o 250m de multifilamento 0.20mm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="maintenance-section">
             <h2 class="maintenance-title">🔧 Mantenimiento de Equipos</h2>
             
@@ -376,5 +262,25 @@
             </div>
         </div>
     </div>
+    <script>
+        // JavaScript para el menú hamburguesa
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('open');
+            mobileMenuToggle.classList.toggle('open');
+        });
+
+        // Cierra el menú si se hace clic en un enlace (solo para móvil)
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav.classList.contains('open')) {
+                    mainNav.classList.remove('open');
+                    mobileMenuToggle.classList.remove('open');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
