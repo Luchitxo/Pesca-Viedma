@@ -4,315 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Técnicas de Pesca - Viedma y Carmen de Patagones</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link rel="stylesheet" href="Miniature.css">
+    <header class="main-header">
+    <a href="index.html" class="header-logo">
+        🎣 Mi Mundo de la Pesca
+    </a>
+    <nav class="header-nav" id="mainNav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="tecnicas-pesca.html">Técnicas</a></li>
+            <li><a href="equipos-pesca.html">Equipos</a></li>
+            <li><a href="lugares-pesca.html">Lugares</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#comunidad">Comunidad</a></li>
+        </ul>
+    </nav>
+    <div class="menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            min-height: 100vh;
-            color: white;
-            line-height: 1.6;
-        }
+<script>
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.getElementById('mainNav');
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    mobileMenuToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('open');
+        mobileMenuToggle.classList.toggle('open');
+    });
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: slideInDown 1s ease-out;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .location-subtitle {
-            font-size: 1.3rem;
-            color: #ecf0f1;
-            margin-bottom: 10px;
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 100;
-        }
-
-        .back-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
-
-        .technique-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
-            animation: fadeInUp 1s ease-out;
-            transition: all 0.3s ease;
-        }
-
-        .technique-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .technique-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #ecf0f1;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .technique-icon {
-            font-size: 2.5rem;
-        }
-
-        .technique-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 25px;
-        }
-
-        .technique-description {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .tips-list {
-            background: rgba(255,255,255,0.05);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 4px solid #3498db;
-        }
-
-        .tips-list h4 {
-            color: #3498db;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .tips-list li {
-            margin-bottom: 10px;
-            padding-left: 10px;
-            position: relative;
-        }
-
-        .tips-list li:before {
-            content: '→';
-            position: absolute;
-            left: -10px;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .easy { background: #27ae60; }
-        .medium { background: #f39c12; }
-        .hard { background: #e74c3c; }
-
-        .highlight-box {
-            background: linear-gradient(45deg, rgba(52,152,219,0.2), rgba(155,89,182,0.2));
-            border: 2px solid rgba(52,152,219,0.3);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-box::before {
-            content: '💡';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 3rem;
-            opacity: 0.1;
-        }
-
-        .species-box {
-            background: rgba(46, 204, 113, 0.1);
-            border-left: 4px solid #2ecc71;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-        }
-
-        .species-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .species-item {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 3px solid #3498db;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .species-item:hover {
-            background: rgba(255,255,255,0.1);
-            transform: scale(1.02);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        .close {
-            color: white;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            right: 20px;
-            top: 15px;
-        }
-
-        .close:hover {
-            opacity: 0.7;
-        }
-
-        .fish-image {
-            width: 100%;
-            max-width: 400px;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-
-        .fish-info {
-            color: white;
-            line-height: 1.6;
-        }
-
-        .fish-info h3 {
-            color: #3498db;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
+    // Cierra el menú si se hace clic en un enlace (solo para móvil)
+    mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (mainNav.classList.contains('open')) {
+                mainNav.classList.remove('open');
+                mobileMenuToggle.classList.remove('open');
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .technique-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .species-list {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .technique-section {
-                padding: 25px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <a href="index.html" class="back-btn">← Volver</a>
-
+        });
+    });
+</script>
     <div class="container">
         <header>
-            <h1>🎯 Técnicas de Pesca</h1>
-            <p class="location-subtitle">Viedma y Carmen de Patagones</p>
-            <p>Río Negro - Información Verificada</p>
+            <section class="map-section" style="margin-bottom: 50px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); background: rgba(255,255,255,0.1);">
+    <h2 style="font-size: 2rem; text-align: center; margin-bottom: 25px; padding-top: 20px; color: #ecf0f1;">🗺️ Nuestros Spots en el Mapa</h2>
+    <div style="width: 100%; height: 500px; border-radius: 0 0 20px 20px; overflow: hidden;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1544.757047395011!2d-62.99042503927649!3d-40.81755159047911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95f159159938e553%3A0x6b4c10729227f27a!2sViedma%2C%20R%C3%ADo%20Negro!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <p style="text-align: center; padding: 20px; font-size: 0.9rem; opacity: 0.8;">
+        Utiliza el mapa para explorar la ubicación de nuestros principales lugares de pesca y planificar tu acceso.
+    </p>
+</section>
         </header>
 
         <div class="technique-section">
